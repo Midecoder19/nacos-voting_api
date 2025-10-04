@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const voteSchema = new mongoose.Schema({
-  userId: {
+  studentId: {  // ✅ changed from userId to studentId
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'Student',  // ✅ reference Student instead of User
     required: true
   },
   candidateId: {

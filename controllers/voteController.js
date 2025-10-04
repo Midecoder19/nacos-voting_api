@@ -1,39 +1,42 @@
 // controllers/voteController.js
-const User = require('../models/User');
+const Student = require('../models/Student');
 const Candidate = require('../models/Candidate');
+const Vote = require('../models/Vote');
 
 const voteForCandidate = async (req, res) => {
-  const { userId, candidateId, party } = req.body;
+  const { studentId, candidateId, position } = req.body;
 
   try {
-    // Find the user and candidate by their IDs
-    const user = await User.findById(userId);
+    // Find the student and candidate by their IDs
+    const student = await Student.findById(studentId);
     const candidate = await Candidate.findById(candidateId);
 
-    if (!user || !candidate) {
-      return res.status(404).json({ error: 'User or candidate not found' });
+    if (!student || !candidate) {
+      return res.status(404).json({ error: 'Student or candidate not found' });
     }
 
-    // Check if the candidate's position matches the party provided
-    if (candidate.position !== party) {
-      return res.status(400).json({ error: `Candidate does not belong to the ${party} position` });
+    // Ensure candidate belongs to the position provided
+    if (candidate.position !== position) {
+      return res.status(400).json({ error: `Candidate does not belong to the ${position} position` });
     }
 
-    // Check if the user has already voted for a candidate in this position
-    for (const votedId of user.votedCandidates) {
-      const votedCandidate = await Candidate.findById(votedId);
-      if (votedCandidate.position === party) {
-        return res.status(400).json({ error: `You have already voted for a candidate in the ${party} position` });
-      }
+    // Check if the student already voted for this position
+    const existingVote = await Vote.findOne({ studentId: student._id, position });
+    if (existingVote) {
+      return res.status(400).json({ error: `You have already voted for the ${position} position` });
     }
 
     // Cast the vote
     candidate.votes += 1;
     await candidate.save();
 
-    // Add the candidate to the user's list of voted candidates
-    user.votedCandidates.push(candidateId);
-    await user.save();
+    // Save the vote record
+    const vote = new Vote({
+      studentId: student._id,
+      candidateId,
+      position,
+    });
+    await vote.save();
 
     res.status(200).json({
       message: 'Vote cast successfully',
