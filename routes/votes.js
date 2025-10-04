@@ -2,34 +2,33 @@ const express = require('express');
 const router = express.Router();
 const Candidate = require('../models/Candidate');
 const Vote = require('../models/Vote');
-const Student = require('../models/Student'); // ✅ use Student model
+const Student = require('../models/Student'); // ✅ Student model
 
+// Cast Votes
 router.post('/', async (req, res) => {
   const { nacosId, votes } = req.body; // votes = [{ candidateId, position }]
 
   try {
-    // 🔹 Fetch the student using nacosId
+    // 🔹 Find student by NACOS ID
     const student = await Student.findOne({ nacosId });
-
     if (!student) {
       return res.status(404).json({ error: 'Student not found' });
     }
 
-    // 🔹 Ensure the student has a valid NACOS ID
+    // 🔹 Check NACOS ID validity
     if (!student.nacosId) {
-      return res.status(403).json({ error: 'Only students with a valid NACOS ID are allowed to vote' });
+      return res.status(403).json({ error: 'Invalid NACOS ID' });
     }
 
-    // 🔹 Prevent multiple votes for the same position
-    for (let i = 0; i < votes.length; i++) {
-      const { candidateId, position } = votes[i];
-
+    // 🔹 Process each vote
+    for (const { candidateId, position } of votes) {
+      // Check if student already voted for this position
       const existingVote = await Vote.findOne({ studentId: student._id, position });
       if (existingVote) {
-        return res.status(400).json({ error: `You have already voted for the position: ${position}` });
+        return res.status(400).json({ error: `You have already voted for the ${position} position` });
       }
 
-      // 🔹 Increment candidate votes
+      // Find and increment candidate votes
       const candidate = await Candidate.findByIdAndUpdate(
         candidateId,
         { $inc: { votes: 1 } },
@@ -40,18 +39,17 @@ router.post('/', async (req, res) => {
         return res.status(404).json({ error: `Candidate not found for position: ${position}` });
       }
 
-      // 🔹 Save the vote
-      const vote = new Vote({
-        studentId: student._id, // ✅ use studentId instead of userId
+      // Save the vote
+      await new Vote({
+        studentId: student._id,
         candidateId,
-        position
-      });
-      await vote.save();
+        position,
+      }).save();
     }
 
-    res.json({ message: 'Votes successfully recorded' });
+    res.status(200).json({ message: '✅ Votes successfully recorded' });
   } catch (error) {
-    console.error('Error during voting:', error);
+    console.error('❌ Error during voting:', error);
     res.status(500).json({ error: 'Server error' });
   }
 });

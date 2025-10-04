@@ -47,7 +47,20 @@ const voteForCandidate = async (req, res) => {
     res.status(500).json({ error: 'Error casting vote' });
   }
 };
+// Fetch all candidates (optionally grouped by position)
+const getAllCandidates = async (req, res) => {
+  try {
+    const candidates = await Candidate.find().sort({ position: 1, name: 1 }); 
+    res.status(200).json(candidates);
+  } catch (error) {
+    console.error('Error fetching candidates:', error);
+    res.status(500).json({ error: 'Error fetching candidates' });
+  }
+};
+
 
 module.exports = {
   voteForCandidate,
+  getAllCandidates,
 };
+
