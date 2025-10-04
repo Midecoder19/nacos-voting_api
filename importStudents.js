@@ -12,7 +12,7 @@ const emailApi = new brevo.TransactionalEmailsApi();
 emailApi.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY);
 
 // Read Excel file
-const workbook = xlsx.readFile('students.xlsx');
+const workbook = xlsx.readFile('students.xls');
 const sheet = workbook.Sheets[workbook.SheetNames[0]];
 const students = xlsx.utils.sheet_to_json(sheet);
 
