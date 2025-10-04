@@ -1,0 +1,97 @@
+[
+  {
+    "name": "Owolabi Oluwaseunayo Eniafe",
+    "position": "President",
+    "photo": "./uploads/owolabi.jpg"
+  },
+  {
+    "name": "Ayangbola Farouq Olabidemi",
+    "position": "President",
+    "photo": "./uploads/ayangbola.jpg"
+  },
+  {
+    "name": "Rahamon Taoheed Ayomide",
+    "position": "General Secretary",
+    "photo": "./uploads/rahamon.jpg"
+  },
+  {
+    "name": "Aremu Boluwatife Tobiloba",
+    "position": "General Secretary",
+    "photo": "./uploads/aremu.jpg"
+  },
+  {
+    "name": "Oladepo Jubril Olalekan",
+    "position": "Assistant General Secretary",
+    "photo": "./uploads/oladepo.jpg"
+  },
+  {
+    "name": "Adeniran Kaosara Abidemi",
+    "position": "Financial Secretary",
+    "photo": "./uploads/adeniran.jpg"
+  },
+  {
+    "name": "Lawal Maleek Olamilekan",
+    "position": "Public Relations Officer (PRO 1)",
+    "photo": "./uploads/lawal.jpg"
+  },
+  {
+    "name": "Raji Fuhad Oluwadamilare",
+    "position": "Public Relations Officer (PRO 1)",
+    "photo": "./uploads/raji.jpg"
+  },
+  {
+    "name": "Alli Aishat Ayomide",
+    "position": "Public Relations Officer (PRO 2)",
+    "photo": "./uploads/alli.jpg"
+  },
+  {
+    "name": "Olajide Motunrayo Abiola",
+    "position": "Welfare Director 1",
+    "photo": "./uploads/olajide.jpg"
+  },
+  {
+    "name": "Matthew Sarah Adejoke",
+    "position": "Welfare Director 2",
+    "photo": "./uploads/matthew.jpg"
+  },
+  {
+    "name": "Odesanya Michael",
+    "position": "Sport Director 1",
+    "photo": "./uploads/odesanya.jpg"
+  },
+  {
+    "name": "Olaleye Stephen Olakunle",
+    "position": "Sport Director 2",
+    "photo": "./uploads/olaleye.jpg"
+  },
+  {
+    "name": "Azeez Samuel",
+    "position": "Social Director 1",
+    "photo": "./uploads/azeez.jpg"
+  },
+  {
+    "name": "Arifalo Oluwatomisin Stephen",
+    "position": "Social Director 1",
+    "photo": "./uploads/arifalo.jpg"
+  },
+  {
+    "name": "Asuquo Philip",
+    "position": "Social Director 2",
+    "photo": "./uploads/asuquo.jpg"
+  },
+  {
+    "name": "Kehinde Jamiu Ajibola",
+    "position": "Software Director 1",
+    "photo": "./uploads/kehinde.jpg"
+  },
+  {
+    "name": "Oladimeji Abdulquadri Adegboyega",
+    "position": "Software Director 1",
+    "photo": "./uploads/oladimeji.jpg"
+  },
+  {
+    "name": "Hamzat Shamsudeen Olamilekan",
+    "position": "NACOS Auditor",
+    "photo": "./uploads/hamzat.jpg"
+  }
+]
