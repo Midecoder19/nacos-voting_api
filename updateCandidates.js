@@ -23,7 +23,7 @@ const updateCandidates = async () => {
     await Candidate.deleteMany({});
     console.log('🗑️ Old candidates deleted');
 
-    // 3. Insert new candidates
+    // 3. Insert new candidates-/5
     for (const cand of candidatesData) {
       const filePath = path.resolve(cand.photo);
 

@@ -7,10 +7,10 @@ router.get('/dashboard', async (req, res) => {
   try {
     const positions = [
       'Vice President', 'President', 'General Secretary', 'Assistant General Secretary',
-      'Treasurer', 'Financial Secretary', 'Auditor', 'Software director 1', 'Social director 1',
-      'Sport director 1', 'Welfare Director 1', 'Public Relation Officer (PRO) 1',
-      'Public Relation Officer (PRO) 2', 'Assistance Software director', 'Assistance Social director',
-      'Assistance Sport director', 'Assistance Welfare Director'
+      'Treasurer', 'Financial Secretary', 'Auditor', 'Software Director 1', 'Social Director 1',
+      'Sport Director 1', 'Welfare Director 1', 'Public Relations Officer (PRO 1)',
+      'Public Relations Officer (PRO 2)', 'Assistance Software director', 'Assistance Social director',
+      'Sport Director 2', 'Welfare Director 2'
     ];
 
     const dashboardData = {};
