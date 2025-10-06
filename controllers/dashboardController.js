@@ -2,10 +2,11 @@ const Candidate = require('../models/Candidate');
 
 const getDashboardData = async (req, res) => {
   try {
-    const positions = ['Vice President', 'President', 'General Secretary', 'Assistant General Secretary', 'Tresurer','Financial Secretary','Auditor','Software Director 1','Social Director 1','Sport Director 1','Welfare Director 1','Public Relations Officer (PRO 1)','Public Relations Officer (PRO 2)','Software Director 1','Social Director 2r','Assistance Sport director','Welfare Director 2,Sport Director 2'];
+    // Get all unique positions dynamically
+    const positions = await Candidate.distinct('position');
 
     const dashboardData = {};
-    
+
     for (const position of positions) {
       dashboardData[position] = await Candidate.find({ position }).sort({ votes: -1 }).lean();
     }
