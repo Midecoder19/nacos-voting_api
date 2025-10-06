@@ -9,7 +9,7 @@ router.get('/dashboard', async (req, res) => {
       'Vice President', 'President', 'General Secretary', 'Assistant General Secretary',
       'Treasurer', 'Financial Secretary', 'Auditor', 'Software Director 1', 'Social Director 1',
       'Sport Director 1', 'Welfare Director 1', 'Public Relations Officer (PRO 1)',
-      'Public Relations Officer (PRO 2)', 'Assistance Software director', 'Assistance Social director',
+      'Public Relations Officer (PRO 2)', 'Assistance Software director', 'Social Director 2',
       'Sport Director 2', 'Welfare Director 2'
     ];
 

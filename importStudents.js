@@ -48,8 +48,6 @@ async function populateStudents() {
 
         // Save student
         const student = new Student({
-          matricNumber: studentData.matricNumber,
-          fullName: studentData.fullName,
           level: studentData.level,
           nacosId: studentData.nacosId,
           email: studentData.email,
@@ -65,12 +63,12 @@ async function populateStudents() {
         email.subject = "NACOS E-Voting Login Details";
 
         email.textContent = `
-Dear ${studentData.fullName},
+Dear User,
 
 Your account has been successfully created for the NACOS E-Voting system.
 
 Login Details:
-- Matric Number: ${studentData.matricNumber}
+- Matric Number: <h3> USE YOUR VALID MATRIC NUMBER </h3>
 - Level: ${studentData.level}
 - NACOS ID: ${studentData.nacosId}
 - Password: ${password}
@@ -89,11 +87,11 @@ SOFTWARE TEAM
         `;
 
         email.htmlContent = `
-          <p>Dear <b>${studentData.fullName}</b>,</p>
+          <p>Dear <b>User</b>,</p>
           <p>Your account has been successfully created for the <b>NACOS E-Voting system</b>.</p>
           <p><b>Login Details:</b></p>
           <ul>
-            <li><b>Matric Number:</b> ${studentData.matricNumber}</li>
+            <li><b>Matric Number:</b>Input you valid matric number</li>
             <li><b>Level:</b> ${studentData.level}</li>
             <li><b>NACOS ID:</b> ${studentData.nacosId}</li>
             <li><b>Password:</b> ${password}</li>
