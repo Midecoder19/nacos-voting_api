@@ -7,55 +7,65 @@ dotenv.config();
 
 async function addManualStudents() {
   try {
-    // ✅ Connect DB
+    // ✅ Connect to MongoDB
     await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
       serverSelectionTimeoutMS: 30000
     });
+
     console.log("✅ MongoDB connected");
 
-    // 🔽 Replace with your 10 manual students
+    // 🔽 Add your manual students here (up to 10 or more)
     const manualStudents = [
-      { matricNumber: "202345895", level: "HND1", nacosId: "0001", email: "oladaposamuel94@gmail.com" },
-      // ...add up to 10
+      { matricNumber: "4444", level: "HND1", nacosId: "3331", email: "wale@gmail.com" },
+      
+      // ...add more
     ];
 
     for (const studentData of manualStudents) {
       try {
-        // Generate password
-        const password = Math.random().toString(36).slice(-8);
-        const hashedPassword = await bcrypt.hash(password, 10);
+        // 🔒 Check if student already exists
+        const existing = await Student.findOne({ nacosId: studentData.nacosId, level: studentData.level });
+        if (existing) {
+          console.log(`⚠️  Skipped: Student with NACOS ID ${studentData.nacosId} already exists.`);
+          continue;
+        }
 
-        // Save student
+        // 🔐 Generate random password and hash
+        const rawPassword = Math.random().toString(36).slice(-8); // e.g. 'k92jd1qf'
+        const hashedPassword = await bcrypt.hash(rawPassword, 10);
+
+        // 🧑 Create and save student
         const student = new Student({
-          matricNumber: studentData.matricNumber,
-          level: studentData.level,
-          nacosId: studentData.nacosId,
-          email: studentData.email,
+          ...studentData,
           password: hashedPassword
         });
 
         await student.save();
 
-        // 🎉 Log credentials instead of sending email
+        // ✅ Log result
         console.log(`
 ===========================
-📧 Student Added:
-- Email: ${studentData.email}
-- Matric Number: ${studentData.matricNumber}
-- NACOS ID: ${studentData.nacosId}
-- Level: ${studentData.level}
-- Password: ${password}
+✅ Student Added:
+- Email: ${student.email}
+- Matric Number: ${student.matricNumber}
+- NACOS ID: ${student.nacosId}
+- Level: ${student.level}
+- Password: ${rawPassword}
 ===========================
         `);
-
       } catch (err) {
-        console.error(`❌ Error adding student: ${studentData.email} -> ${err.message}`);
+        console.error(`❌ Error adding ${studentData.email}: ${err.message}`);
       }
     }
 
-    mongoose.connection.close();
+    // 🔒 Close connection
+    await mongoose.connection.close();
+    console.log("🔌 MongoDB connection closed");
+
   } catch (err) {
-    console.error("❌ Error:", err.message);
+    console.error("❌ Connection Error:", err.message);
   }
 }
 
